@@ -4,9 +4,8 @@ import './App.css';
 
 import { AppWrapper } from './component/app-wrapper/app-warpper.component'
 import { Header } from './component/header/header.component'
-import { SubmitForm } from './component/submit-form/submit-form.component'
-import { TodoList } from './component/todo-list/todo-list.component'
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ViewTodoList } from './view/view-todo-list'
 
 class App extends React.Component {
 
@@ -26,11 +25,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppWrapper>
-        <Header numTodos={this.state.tasks.length} />
-        <SubmitForm onFormSubmit={this.handleSubmit} />
-        <TodoList tasks={this.state.tasks} onDelete={this.handleDelete} />
-      </AppWrapper>);
+      <div>
+        <AppWrapper>
+          <Router>
+            <Header numTodos={this.state.tasks.length} />
+            <Route path="/" exact component={ViewTodoList}/>
+          </Router>
+        </AppWrapper>
+      </div>
+
+    );
   }
 }
 
